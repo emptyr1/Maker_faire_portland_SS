@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ProcessingCore"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/modes/java/libraries/serial/library/jssc.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/modes/java/libraries/serial/library/serial.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/modes/java/libraries/video/library/gstreamer-java.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/modes/java/libraries/video/library/jna.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/modes/java/libraries/video/library/video.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/ant-launcher.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/ant.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/antlr.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/com.ibm.icu_4.4.2.v20110823.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/core.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/jdi.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/jdimodel.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/jna.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/org-netbeans-swing-outline.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/org.eclipse.osgi_3.8.1.v20120830-144521.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/pde.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
