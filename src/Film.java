@@ -6,7 +6,7 @@ import processing.video.Movie;
 
 
 public class Film {  //individual film
-	
+
 	PApplet pparent;
 	PVector location = new PVector(); 
 	PVector targetLocation = new PVector();
@@ -14,7 +14,7 @@ public class Film {  //individual film
 	String filename;
 	public static int VIDEO_WIDTH = 640;
 	public static int VIDEO_HEIGHT = 480;
-	
+
 	public Movie myMovie;
 
 
@@ -34,6 +34,7 @@ public class Film {  //individual film
 
 	public void loopMovie(){
 		myMovie.loop();
+
 	}
 
 	public void pauseMovie(){
@@ -41,17 +42,17 @@ public class Film {  //individual film
 	}
 
 	public void display(int whichVideo, ArrayList<PVector> v) {
-			float tweenAmt = 0.3f;
-			location.y = (1.f- tweenAmt) * location.y + tweenAmt * targetLocation.y;
-			
-			//pparent.println("Now I'm on screen");
-			myMovie.play();
-			pparent.image(myMovie, v.get(0).x, v.get(0).y, VIDEO_WIDTH, VIDEO_HEIGHT);
-			//pparent.println(location.x + " " + location.y);
-		
+		float tweenAmt = 0.3f;
+		location.y = (1.f- tweenAmt) * location.y + tweenAmt * targetLocation.y;
+
+		//pparent.println("Now I'm on screen");
+		myMovie.play();
+		pparent.image(myMovie, location.x, location.y, VIDEO_WIDTH, VIDEO_HEIGHT);
+		//pparent.println(location.x + " " + location.y);
+
 
 	}
-	
+
 
 	public boolean onScreen() {
 		float halfHeight = pparent.height * 0.5f;
@@ -60,7 +61,7 @@ public class Film {  //individual film
 		//	return true;
 		//}
 
-		if( (location.y > 0) && (location.y < 1000) ) {
+		if( (location.y > 0) && (location.y < MainApp.WINDOW_HEIGHT) ) {
 			//parent.println("Video is on-screen");
 			return true;
 		}
@@ -69,17 +70,18 @@ public class Film {  //individual film
 			return false;
 		}
 	}
-	
+
 	//called on user interaction events. called by FilmStripSystem with correct position for this slide
 	public void setTargetPosition(PVector targetPos, boolean jumpToPos){
 		//jumpToPos is a boolean which indicates whether or not the slide should tween to the position
 		// the slide should not tween if it is being moved to the opposite side of the visible area
-		
-		if (jumpToPos){
-			//jump immediately to the target position
-			location = targetPos;
-		} //otherwise, tween to the target position.	
-		targetLocation = targetPos;
+		//if(FilmStripSystem.isSelected) {
+			if (jumpToPos){
+				//jump immediately to the target position
+				location = targetPos;
+			} //otherwise, tween to the target position.	
+			targetLocation = targetPos;
+		//}
 	}
 
 }

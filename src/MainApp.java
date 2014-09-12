@@ -11,10 +11,10 @@ public class MainApp extends PApplet {
 	public int NUMBER_STRIPS = 3;
 	public int CURRENT_STRIP = 0;
 
-
+	public boolean isitSelected = true;
 
 	public static int m = 640;
-	public static int n = 300;
+	public static int MARGIN_TOP = 300;
 
 	///////////////////////////////////////////////////////////////
 
@@ -23,9 +23,7 @@ public class MainApp extends PApplet {
 	///////////////////////////////////////////////////////////////
 
 	//ArrayList<String[]> strips = new ArrayList<String[]>();
-	//for (int i = 0; i < filmStripSystems.length; i++){
-	//	filmStripSystems = new FilmStripSystem(this, );
-	//	}
+
 
 	public String[] strip1 = {"coney.mp4", "kaleidescope.mp4", "kaleidescope.mp4", "stars.mp4", "stars.mp4", "kaleidescope.mp4", "coney.mp4", "kaleidescope.mp4"};
 	public String[] strip2 = {"kaleidescope.mp4", "kaleidescope.mp4", "noisia.mp4", "stars.mp4", "stars.mp4", "kaleidescope.mp4", "coney.mp4", "noisia.mp4"};
@@ -44,7 +42,17 @@ public class MainApp extends PApplet {
 		for(int i = 0; i < filmStripSystems.length; i++) {
 
 			println("initializing filmstrip system");
-			filmStripSystems[i] = new FilmStripSystem(this, i * m, n, allStrips.get(i), CURRENT_STRIP);
+			if(i == 0)  {
+				isitSelected = true;
+				filmStripSystems[i] = new FilmStripSystem(this, i * m, MARGIN_TOP, allStrips.get(i), isitSelected); //m = i*640  n=300
+
+			}
+			else {
+				isitSelected = false;
+				filmStripSystems[i] = new FilmStripSystem(this, i * m, MARGIN_TOP, allStrips.get(i), isitSelected); //m = i*640  n=300
+
+			}
+			println(isitSelected);
 
 		}
 
@@ -60,23 +68,48 @@ public class MainApp extends PApplet {
 	}
 
 	public void keyPressed() {
-		println("key pressed-- do something");
 
-		if(key == 'n') {  //next film strip
-
-			if(CURRENT_STRIP <= 2) {
-				CURRENT_STRIP ++;
-				if(CURRENT_STRIP > 2) {
-					CURRENT_STRIP = 0;
-				}
+		if(key == 'd') {
+			println(" d key presseed");
+			for (int m = 0; m < filmStripSystems.length; m++){
+				if(filmStripSystems[m].AmISelected())
+					//println(filmStripSystems[m].AmISelected());
+					filmStripSystems[m].moveUp();
 			}
-		} else {
-			CURRENT_STRIP = 0;
+
+		}
+		
+		////////////////////////////////////////////////////////////////////////////////
+
+		if(key == 'u') {
+			for (int m = 0; m < filmStripSystems.length; m++){
+				if(filmStripSystems[m].AmISelected())
+					filmStripSystems[m].moveDown();
+			}
+
+		}
+	///////////////////////////////////////////////////////////////////////////////////	
+		if(key == 'l') {
+			
+		}
+		
+		if(key == 'r') {
+			
+			for (int m = 0; m < filmStripSystems.length-1; m++){
+				if(filmStripSystems[m].AmISelected()) {
+					filmStripSystems[m].isSelected = false;
+					filmStripSystems[m+1].isSelected = true;
+				}
+					//filmStripSystems[m].moveDown();
+			}
+			
 		}
 
 
 
 	}
+
+
 	public void movieEvent(Movie m) {
 		m.read();
 	}
