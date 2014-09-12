@@ -48,7 +48,7 @@ public class FilmStripSystem  { //collection of Films
 			parent.print("initialize film number: ");
 			parent.println(i);
 
-			origin = new PVector( x, 300 + parent.height*i ); // 
+			origin = new PVector( x, 300 + films[i].VIDEO_HEIGHT*i ); // 
 
 			videoPos.add(origin);
 
@@ -61,7 +61,7 @@ public class FilmStripSystem  { //collection of Films
 		//int maxx = videoPos.indexOf(max(videoPos.toArray()));
 		//}
 
-		
+
 
 
 	}
@@ -71,21 +71,23 @@ public class FilmStripSystem  { //collection of Films
 		for(int i = 0; i < films.length; i++) { // 8 movies
 
 			if(films[i].onScreen()) {
+				films[i].loopMovie();
 				//parent.println(" this particular video is on screen");
-				films[i].display(i, videoPos );  //(0, 300), (0, 1440)
+				films[i].display(i);  //(0, 300), (0, 1440)
 			} else {
 				films[i].pauseMovie();
+				//films[i].jump(0);
 			}
 
 		}
 	}
-	
+
 	public void setSelected() {
-		
+
 	}
-	
+
 	public void getSelected() {
-		
+
 	}
 
 	public boolean AmISelected() {
@@ -97,39 +99,31 @@ public class FilmStripSystem  { //collection of Films
 	}
 
 
-	//setTargetPosition
-	public void reassign(ArrayList<PVector> _videoPos) {
-
-		for(int k = 0; k < films.length-1; k++) {
-			//points[k] = videoPos.get(k);
-			//targetPoints[k] = videoPos.get(k+1);
-
-			//films[k].
-		}
-
-	}
-
-
 	public void moveUp() {
 
 		for(int j = 0; j < films.length; j++) {	
-
-			if(videoPos.get(films.length-1).y > 299  ) {
-				videoPos.get(j).y -= 1080;
-
-				//float point = videoPos.get(j).y;
-				//float targetpoint = videoPos.get(j).y - MainApp.WINDOW_HEIGHT;
-				//float deltaPoint =parent.lerp(point, targetpoint, 0.3f);
-
-				films[j].setTargetPosition(videoPos.get(j), true);
-
-				//parent.println(videoPos.get(0));
+			//if(videoPos.get(films.length-1).y > 300  ) {
+			//videoPos.get(j).y -= 1080;
 
 
-			} else {
+			/*for (int i = 0; i < films.length; i++) {
+					float startpoint = videoPos.get(j).y;
+					float targetpoint = videoPos.get(j).y - MainApp.WINDOW_HEIGHT; 
+					float deltaPoint = parent.lerp(startpoint, targetpoint, 0.4f);
+
+			 */
+			Film theFilm = films[j];
+			PVector targetPos = new PVector(theFilm.location.x, theFilm.location.y - (float)theFilm.VIDEO_HEIGHT);
+			parent.println("updating film: " + j + " to location x,y: " + targetPos.x + ", " + targetPos.y);
+
+			films[j].setTargetPosition(targetPos, false );
+			//parent.println(videoPos.get(0));
 
 
-			}
+			// else {
+
+
+			//}
 
 		}
 
@@ -141,7 +135,7 @@ public class FilmStripSystem  { //collection of Films
 		for(int j = 0; j < films.length; j++) {	
 
 			//if(videoPos.get(films.length-1).y < -8340 ) {
-			videoPos.get(j).y += 1080;
+			//videoPos.get(j).y += 1080;
 			films[j].setTargetPosition(videoPos.get(j), true);
 
 			//}
@@ -151,16 +145,8 @@ public class FilmStripSystem  { //collection of Films
 
 	}
 
-	public void StripkeyPressed() {
-		if(parent.key == 'n') {
+
+}  // end class
 
 
 
-		}
-
-
-
-	}
-
-
-}

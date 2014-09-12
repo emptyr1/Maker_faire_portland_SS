@@ -15,6 +15,7 @@ public class MainApp extends PApplet {
 
 	public static int m = 640;
 	public static int MARGIN_TOP = 300;
+	public int t = 0;
 
 	///////////////////////////////////////////////////////////////
 
@@ -42,7 +43,7 @@ public class MainApp extends PApplet {
 		for(int i = 0; i < filmStripSystems.length; i++) {
 
 			println("initializing filmstrip system");
-			if(i == 0)  {
+			if(i == 1)  {
 				isitSelected = true;
 				filmStripSystems[i] = new FilmStripSystem(this, i * m, MARGIN_TOP, allStrips.get(i), isitSelected); //m = i*640  n=300
 
@@ -78,7 +79,7 @@ public class MainApp extends PApplet {
 			}
 
 		}
-		
+
 		////////////////////////////////////////////////////////////////////////////////
 
 		if(key == 'u') {
@@ -88,21 +89,24 @@ public class MainApp extends PApplet {
 			}
 
 		}
-	///////////////////////////////////////////////////////////////////////////////////	
+		///////////////////////////////////////////////////////////////////////////////////	
 		if(key == 'l') {
-			
+
 		}
-		
+
 		if(key == 'r') {
-			
-			for (int m = 0; m < filmStripSystems.length-1; m++){
+
+			for (int m = 0; m < filmStripSystems.length; m++){
+
+				t = (t + 1) % filmStripSystems.length;
+
 				if(filmStripSystems[m].AmISelected()) {
 					filmStripSystems[m].isSelected = false;
 					filmStripSystems[m+1].isSelected = true;
 				}
-					//filmStripSystems[m].moveDown();
+				//filmStripSystems[m].moveDown();
 			}
-			
+
 		}
 
 
@@ -115,5 +119,11 @@ public class MainApp extends PApplet {
 	}
 
 
+	public static void main(String args[]) {
+		PApplet.main(new String[] { "--present", "MainApp" });
+	}
+
 }
+
+
 
