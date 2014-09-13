@@ -27,6 +27,7 @@ public class FilmStripSystem  { //collection of Films
 
 	public int currentStrip;
 	public ArrayList<PVector> videoPos = new ArrayList<PVector>();
+	public ArrayList<PVector> videoPosCloned = new ArrayList<PVector>();
 
 
 	public static String[] movies = new String[8];
@@ -61,9 +62,7 @@ public class FilmStripSystem  { //collection of Films
 		//parent.println(Collections.max(videoPos));
 		//int maxx = videoPos.indexOf(max(videoPos.toArray()));
 		//}
-
-
-
+		videoPosCloned = new ArrayList<PVector>(videoPos);
 
 	}
 
@@ -74,7 +73,7 @@ public class FilmStripSystem  { //collection of Films
 			if(films[i].onScreen()) {
 				films[i].loopMovie();
 				//parent.println(" this particular video is on screen");
-				films[i].display(i);  //(0, 300), (0, 1440)
+				films[i].display( videoPos.get(i), i );  //(0, 300), (0, 1440)
 			} else {
 				films[i].pauseMovie();
 				//films[i].jump(0);
@@ -82,15 +81,6 @@ public class FilmStripSystem  { //collection of Films
 
 		}
 	}
-
-	public void setSelected() {
-
-	}
-
-	public void getSelected() {
-
-	}
-
 	public boolean AmISelected() {
 		if(isSelected) {
 			return true;
@@ -122,14 +112,13 @@ public class FilmStripSystem  { //collection of Films
 			//PVector targetPos = new PVector(films[j].location.x, films[j].location.y - (float)films[j].VIDEO_HEIGHT);
 			//parent.println("updating film: " + j + " to location x,y: " + targetPos.x + ", " + targetPos.y);
 
-			films[j].setTargetPosition(videoPos.get(j), false ); //stores targetPos in targetLocation vector
+			films[j].setTargetPosition(videoPosCloned.get(j), videoPos.get(j), true ); //stores targetPos in targetLocation vector
 			//parent.println(videoPos.get(0));
 			
 			if(films[j].onScreen()) {
 				films[j].loopMovie();
 			}
 		}
-		
 		
 
 	}
@@ -139,11 +128,10 @@ public class FilmStripSystem  { //collection of Films
 		parent.println("previous key pressed");
 		for(int j = 0; j < films.length; j++) {	
 
-			//if(videoPos.get(films.length-1).y < -8340 {
-			
+			//if(videoPos.get(films.length-1).y < -8340 {	
 			
 			videoPos.get(j).y += 1080;
-			films[j].setTargetPosition(videoPos.get(j), true);
+			//films[j].setTargetPosition(videoPos.get(j), true);
 
 
 
