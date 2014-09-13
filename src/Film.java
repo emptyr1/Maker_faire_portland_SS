@@ -29,8 +29,8 @@ public class Film {  //individual film
 		myMovie.pause();
 		isPlaying = false;
 		location = _Vpos.get();
-		targetLocation = location;
-		pparent.println(location.x + " " + location.y);
+		targetLocation = location.get();
+		pparent.println("location ->" + location.x + " " + location.y);
 	}
 
 
@@ -48,20 +48,15 @@ public class Film {  //individual film
 		//myMovie.jump(0);
 	}
 
-	public void display(PVector targetLocation,int whichVideo) {
+	public void display(int whichVideo) {
+		//pparent.println("location ->" + location.x + " " + location.y);
 
 		float tweenAmt = 0.04f;
-		location.y = (1.f- tweenAmt) * location.y + tweenAmt * targetLocation.y;
+		//location.y = (1.f- tweenAmt) * location.y + tweenAmt * targetLocation.y;
 
-		//location.lerp(targetLocation, 0.02f);
-		//pparent.println( pparent.abs(location.y - targetLocation.y) );
-		//if (pparent.abs(location.y - targetLocation.y) < 0.0f) location.y = targetLocation.y; 
-		//if(onScreen()) {
-			//myMovie.play();
-			pparent.image(myMovie, targetLocation.x, targetLocation.y, VIDEO_WIDTH, VIDEO_HEIGHT);
-			//pparent.println(location.x + " " + location.y);
-			
-		//}
+		location.lerp(targetLocation.x, targetLocation.y, 0.0f, 0.3f);
+		pparent.image(myMovie, location.x, location.y, VIDEO_WIDTH, VIDEO_HEIGHT);
+
 
 	}
 
@@ -83,7 +78,7 @@ public class Film {  //individual film
 
 		 */
 
-		if( (location.y > -200) && (location.y + 300 < MainApp.WINDOW_HEIGHT) ) {
+		if( (location.y > -300) && (location.y + 400 < MainApp.WINDOW_HEIGHT) ) {
 			return true;
 		}else{
 			return false;
@@ -93,11 +88,8 @@ public class Film {  //individual film
 
 	//called on user interaction events. called by FilmStripSystem with correct position for this slide
 	public void setTargetPosition(PVector _loc, PVector targetPos, boolean jumpToPos){
-		//jumpToPos is a boolean which indicates whether or not the slide should tween to the position
-		// the slide should not tween if it is being moved to the opposite side of the visible area
-		//if(FilmStripSystem.isSelected) {
 		location = _loc.get();
-		targetLocation = targetPos;
+		targetLocation = targetPos.get();
 		//pparent.println(targetLocation);
 	}
 

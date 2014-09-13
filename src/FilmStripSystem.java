@@ -73,7 +73,7 @@ public class FilmStripSystem  { //collection of Films
 			if(films[i].onScreen()) {
 				films[i].loopMovie();
 				//parent.println(" this particular video is on screen");
-				films[i].display( videoPos.get(i), i );  //(0, 300), (0, 1440)
+				films[i].display( i );  //(0, 300), (0, 1440)
 			} else {
 				films[i].pauseMovie();
 				//films[i].jump(0);
@@ -93,31 +93,21 @@ public class FilmStripSystem  { //collection of Films
 	public void moveUp() {
 		parent.println(videoPos);
 
-		for(int j = 0; j < videoPos.size(); j++) {	
+		for(int j = 0 ; j < films.length; j++ ) {	
 			//if(videoPos.get(films.length-1).y > 300  ) {
-			videoPos.get(j).y -= 500;
+			//videoPos.get(j).y -= 500;
 			float startpoint = videoPos.get(j).y;
 			float targetpoint = videoPos.get(j).y - 500; 
 			
-			float delta = parent.lerp(startpoint, targetpoint, 0.1f);
-			PVector deltaVector = new PVector(x, delta);
-			//parent.println(delta);
-
-			/*for (int i = 0; i < films.length; i++) {
-					
-					float deltaPoint = parent.lerp(startpoint, targetpoint, 0.4f);
-
-			 */
-			//Film theFilm = films[j];
-			//PVector targetPos = new PVector(films[j].location.x, films[j].location.y - (float)films[j].VIDEO_HEIGHT);
-			//parent.println("updating film: " + j + " to location x,y: " + targetPos.x + ", " + targetPos.y);
-
-			films[j].setTargetPosition(videoPosCloned.get(j), videoPos.get(j), true ); //stores targetPos in targetLocation vector
-			//parent.println(videoPos.get(0));
+			float delta = parent.lerp(startpoint, targetpoint, 0.4f);
+			PVector sampleTarget = new PVector(x, delta);
 			
-			if(films[j].onScreen()) {
-				films[j].loopMovie();
-			}
+
+			films[j].setTargetPosition(videoPosCloned.get(j), sampleTarget, true ); //stores targetPos in targetLocation vector
+			//parent.println(videoPos.get(0));
+			films[j].display(1);
+			parent.println(videoPosCloned.get(j));
+			videoPosCloned.get(j).y -= 500;
 		}
 		
 
