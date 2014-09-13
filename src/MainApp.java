@@ -46,7 +46,7 @@ public class MainApp extends PApplet {
 		for(int i = 0; i < filmStripSystems.length; i++) {
 
 			println("initializing filmstrip system");
-			if(i == 2)  {
+			if(i == 1)  {
 				isitSelected = true;
 				
 			}
@@ -98,16 +98,20 @@ public class MainApp extends PApplet {
 		}
 
 		if(key == 'r') {
-			t = (t+1) % filmStripSystems.length;
-			println(t);
+			
+			
+			//println(t);
 
 			for (int m = 0; m < filmStripSystems.length; m++){
 
-				
+				t = m;
 
-				if(filmStripSystems[m].AmISelected()) {
-					filmStripSystems[m].isSelected = false;
-				//	filmStripSystems[m+1].isSelected = true;
+				if(filmStripSystems[t].AmISelected()) {
+					filmStripSystems[t].isSelected = false;
+					
+					t = (t+1) % filmStripSystems.length;
+					println(t);
+					filmStripSystems[t].isSelected = true;
 					break;
 				} else {
 					println("now nothing is selected");
