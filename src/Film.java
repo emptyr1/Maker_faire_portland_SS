@@ -54,7 +54,7 @@ public class Film {  //individual film
 		float tweenAmt = 0.04f;
 		//location.y = (1.f- tweenAmt) * location.y + tweenAmt * targetLocation.y;
 
-		location.lerp(targetLocation.x, targetLocation.y, 0.0f, 0.3f);
+		location.lerp(targetLocation.x, targetLocation.y, 0.0f, 0.04f);
 		pparent.image(myMovie, location.x, location.y, VIDEO_WIDTH, VIDEO_HEIGHT);
 
 
@@ -78,7 +78,7 @@ public class Film {  //individual film
 
 		 */
 
-		if( (location.y > -300) && (location.y + 400 < MainApp.WINDOW_HEIGHT) ) {
+		if( (location.y > -300) && (location.y + 300 < MainApp.WINDOW_HEIGHT) ) {
 			return true;
 		}else{
 			return false;
@@ -89,6 +89,14 @@ public class Film {  //individual film
 	//called on user interaction events. called by FilmStripSystem with correct position for this slide
 	public void setTargetPosition(PVector _loc, PVector targetPos, boolean jumpToPos){
 		location = _loc.get();
+		location.y -= 250;
+		targetLocation = targetPos.get();
+		//pparent.println(targetLocation);
+	}
+	
+	public void setTargetPositionUp(PVector _loc, PVector targetPos, boolean jumpToPos){
+		location = _loc.get();
+		location.y += 250;
 		targetLocation = targetPos.get();
 		//pparent.println(targetLocation);
 	}

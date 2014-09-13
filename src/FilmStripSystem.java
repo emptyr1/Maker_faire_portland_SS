@@ -51,7 +51,7 @@ public class FilmStripSystem  { //collection of Films
 			parent.println(i);
 
 			origin = new PVector( x, 50 + 500*i ); // 
-			
+
 			videoPos.add(origin);
 
 			films[i] = new Film( this.parent, movies[i], origin  );
@@ -90,48 +90,62 @@ public class FilmStripSystem  { //collection of Films
 	}
 
 
-	public void moveUp() {
+	public void moveUp() { //'d' key
 		parent.println(videoPos);
 
 		for(int j = 0 ; j < films.length; j++ ) {	
 			//if(videoPos.get(films.length-1).y > 300  ) {
-			//videoPos.get(j).y -= 500;
-			float startpoint = videoPos.get(j).y;
-			float targetpoint = videoPos.get(j).y - 500; 
-			
-			float delta = parent.lerp(startpoint, targetpoint, 0.4f);
+
+			float startpoint = videoPos.get(j).y+300;
+			float targetpoint = videoPos.get(j).y-300; 
+
+			float delta = parent.lerp(startpoint, targetpoint, 0.5f);
 			PVector sampleTarget = new PVector(x, delta);
-			
+
 
 			films[j].setTargetPosition(videoPosCloned.get(j), sampleTarget, true ); //stores targetPos in targetLocation vector
 			//parent.println(videoPos.get(0));
-			films[j].display(1);
+			//		films[j].display(1);
 			parent.println(videoPosCloned.get(j));
-			videoPosCloned.get(j).y -= 500;
-		}
-		
-
-	}
-
-	public void moveDown() {
-
-		parent.println("previous key pressed");
-		for(int j = 0; j < films.length; j++) {	
-
-			//if(videoPos.get(films.length-1).y < -8340 {	
-			
-			videoPos.get(j).y += 1080;
-			//films[j].setTargetPosition(videoPos.get(j), true);
-
-
-
+			//videoPosCloned.get(j).y -= 500;
 		}
 
+		for(int k=videoPos.size()-1; k >=0 ; k--) {
+			videoPosCloned.get(k).y -= 500;
+		}
+
+
 	}
-	
-	public void randomize() {
-		
+
+	public void moveDown() {  // 'u' key
+
+		for(int j = 0 ; j < films.length; j++ ) {	
+			//if(videoPos.get(films.length-1).y > 300  ) {
+
+			float startpoint = videoPos.get(j).y;
+			float targetpoint = videoPos.get(j).y; 
+
+			float delta = parent.lerp(startpoint, targetpoint, 0.5f);
+			PVector sampleTarget = new PVector(x, delta);
+
+
+			films[j].setTargetPositionUp( videoPosCloned.get(j), sampleTarget,true ); //stores targetPos in targetLocation vector
+			//parent.println(videoPos.get(0));
+			//		films[j].display(1);
+			parent.println(videoPosCloned.get(j));
+			//videoPosCloned.get(j).y -= 500;
+		}
+
+		for(int k=videoPos.size()-1; k >=0 ; k--) {
+			videoPosCloned.get(k).y += 500;
+		}
+
+
 	}
+
+public void randomize() {
+
+}
 
 
 }  // end class
