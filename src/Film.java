@@ -89,14 +89,14 @@ public class Film {  //individual film
 	//called on user interaction events. called by FilmStripSystem with correct position for this slide
 	public void setTargetPosition(PVector _loc, PVector targetPos, boolean jumpToPos){
 		location = _loc.get();
-		location.y -= 250;
+		location.y -= 200;
 		targetLocation = targetPos.get();
 		//pparent.println(targetLocation);
 	}
 	
 	public void setTargetPositionUp(PVector _loc, PVector targetPos, boolean jumpToPos){
 		location = _loc.get();
-		location.y += 250;
+		location.y += 200;
 		targetLocation = targetPos.get();
 		//pparent.println(targetLocation);
 	}

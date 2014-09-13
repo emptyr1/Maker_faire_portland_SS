@@ -122,10 +122,10 @@ public class FilmStripSystem  { //collection of Films
 		for(int j = 0 ; j < films.length; j++ ) {	
 			//if(videoPos.get(films.length-1).y > 300  ) {
 
-			float startpoint = videoPos.get(j).y;
-			float targetpoint = videoPos.get(j).y; 
+			float startpoint = videoPosCloned.get(j).y-300;
+			float targetpoint = videoPosCloned.get(j).y+300; 
 
-			float delta = parent.lerp(startpoint, targetpoint, 0.5f);
+			float delta = parent.lerp(targetpoint, startpoint, 0.5f);
 			PVector sampleTarget = new PVector(x, delta);
 
 
