@@ -7,14 +7,14 @@ import java.util.*;
 public class MainApp extends PApplet {
 
 	public static int WINDOW_WIDTH = 1920;
-	public static int WINDOW_HEIGHT = 1080;
+	public static int WINDOW_HEIGHT = 580;
 	public int NUMBER_STRIPS = 3;
 	public int CURRENT_STRIP = 0;
 
 	public boolean isitSelected = true;
 
 	public static int m = 640;
-	public static int MARGIN_TOP = 300;
+	public static int MARGIN_TOP = 10;
 	public int t = 0;
 
 	///////////////////////////////////////////////////////////////
@@ -34,6 +34,9 @@ public class MainApp extends PApplet {
 
 	////////////////////////////////////////////////////////////////
 
+
+	
+	
 	public void setup() {
 		size(WINDOW_WIDTH, WINDOW_HEIGHT);
 		allStrips.add(strip1);
@@ -43,16 +46,15 @@ public class MainApp extends PApplet {
 		for(int i = 0; i < filmStripSystems.length; i++) {
 
 			println("initializing filmstrip system");
-			if(i == 1)  {
+			if(i == 2)  {
 				isitSelected = true;
-				filmStripSystems[i] = new FilmStripSystem(this, i * m, MARGIN_TOP, allStrips.get(i), isitSelected); //m = i*640  n=300
-
+				
 			}
 			else {
 				isitSelected = false;
-				filmStripSystems[i] = new FilmStripSystem(this, i * m, MARGIN_TOP, allStrips.get(i), isitSelected); //m = i*640  n=300
-
 			}
+			filmStripSystems[i] = new FilmStripSystem(this, i * m, MARGIN_TOP, allStrips.get(i), isitSelected); //m = i*640  n=300
+
 			println(isitSelected);
 
 		}
@@ -83,26 +85,32 @@ public class MainApp extends PApplet {
 		////////////////////////////////////////////////////////////////////////////////
 
 		if(key == 'u') {
-			for (int m = 0; m < filmStripSystems.length; m++){
-				if(filmStripSystems[m].AmISelected())
-					filmStripSystems[m].moveDown();
+			println(" u key presseed");
+			for (int u = 0; u < filmStripSystems.length; u++){
+				if(filmStripSystems[u].AmISelected())
+					filmStripSystems[u].moveDown();
 			}
 
 		}
 		///////////////////////////////////////////////////////////////////////////////////	
 		if(key == 'l') {
-
+			
 		}
 
 		if(key == 'r') {
+			t = (t+1) % filmStripSystems.length;
+			println(t);
 
 			for (int m = 0; m < filmStripSystems.length; m++){
 
-				t = (t + 1) % filmStripSystems.length;
+				
 
 				if(filmStripSystems[m].AmISelected()) {
 					filmStripSystems[m].isSelected = false;
-					filmStripSystems[m+1].isSelected = true;
+				//	filmStripSystems[m+1].isSelected = true;
+					break;
+				} else {
+					println("now nothing is selected");
 				}
 				//filmStripSystems[m].moveDown();
 			}
@@ -119,9 +127,7 @@ public class MainApp extends PApplet {
 	}
 
 
-	public static void main(String args[]) {
-		PApplet.main(new String[] { "--present", "MainApp" });
-	}
+	
 
 }
 

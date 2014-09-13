@@ -26,7 +26,7 @@ public class FilmStripSystem  { //collection of Films
 	int x;
 
 	public int currentStrip;
-	ArrayList<PVector> videoPos = new ArrayList<PVector>();
+	public ArrayList<PVector> videoPos = new ArrayList<PVector>();
 
 
 	public static String[] movies = new String[8];
@@ -43,13 +43,14 @@ public class FilmStripSystem  { //collection of Films
 		//currentStrip = _currentStrip;
 		originMoved = new PVector(x,  _y + 1080);
 		isSelected = _isSelected;
-		parent.println(isSelected);	
+		parent.println(isSelected);
+		videoPos.clear();
 		for(int i = 0; i < films.length; i++) {   // 8 films
 			parent.print("initialize film number: ");
 			parent.println(i);
 
-			origin = new PVector( x, 300 + films[i].VIDEO_HEIGHT*i ); // 
-
+			origin = new PVector( x, 50 + 500*i ); // 
+			
 			videoPos.add(origin);
 
 			films[i] = new Film( this.parent, movies[i], origin  );
@@ -100,32 +101,36 @@ public class FilmStripSystem  { //collection of Films
 
 
 	public void moveUp() {
+		parent.println(videoPos);
 
-		for(int j = 0; j < films.length; j++) {	
+		for(int j = 0; j < videoPos.size(); j++) {	
 			//if(videoPos.get(films.length-1).y > 300  ) {
-			//videoPos.get(j).y -= 1080;
-
+			videoPos.get(j).y -= 500;
+			float startpoint = videoPos.get(j).y;
+			float targetpoint = videoPos.get(j).y - 500; 
+			
+			float delta = parent.lerp(startpoint, targetpoint, 0.1f);
+			PVector deltaVector = new PVector(x, delta);
+			//parent.println(delta);
 
 			/*for (int i = 0; i < films.length; i++) {
-					float startpoint = videoPos.get(j).y;
-					float targetpoint = videoPos.get(j).y - MainApp.WINDOW_HEIGHT; 
+					
 					float deltaPoint = parent.lerp(startpoint, targetpoint, 0.4f);
 
 			 */
-			Film theFilm = films[j];
-			PVector targetPos = new PVector(theFilm.location.x, theFilm.location.y - (float)theFilm.VIDEO_HEIGHT);
-			parent.println("updating film: " + j + " to location x,y: " + targetPos.x + ", " + targetPos.y);
+			//Film theFilm = films[j];
+			//PVector targetPos = new PVector(films[j].location.x, films[j].location.y - (float)films[j].VIDEO_HEIGHT);
+			//parent.println("updating film: " + j + " to location x,y: " + targetPos.x + ", " + targetPos.y);
 
-			films[j].setTargetPosition(targetPos, false );
+			films[j].setTargetPosition(videoPos.get(j), false ); //stores targetPos in targetLocation vector
 			//parent.println(videoPos.get(0));
-
-
-			// else {
-
-
-			//}
-
+			
+			if(films[j].onScreen()) {
+				films[j].loopMovie();
+			}
 		}
+		
+		
 
 	}
 
@@ -134,15 +139,20 @@ public class FilmStripSystem  { //collection of Films
 		parent.println("previous key pressed");
 		for(int j = 0; j < films.length; j++) {	
 
-			//if(videoPos.get(films.length-1).y < -8340 ) {
-			//videoPos.get(j).y += 1080;
+			//if(videoPos.get(films.length-1).y < -8340 {
+			
+			
+			videoPos.get(j).y += 1080;
 			films[j].setTargetPosition(videoPos.get(j), true);
 
-			//}
 
 
 		}
 
+	}
+	
+	public void randomize() {
+		
 	}
 
 
